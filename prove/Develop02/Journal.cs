@@ -31,7 +31,7 @@ class Journal
         string entryText = Console.ReadLine();
         JournalEntry entry = new JournalEntry(DateTime.Now, selectedQuestion, $"> {entryText}");
         _entries.Add(entry);
-        }
+    }
 
     public void DisplayJournal()
     {
@@ -78,27 +78,22 @@ class Journal
         string fileName = Console.ReadLine();
         try
         {
+            _entries.Clear();
             using (StreamReader reader = new StreamReader(fileName))
             {
                 string line;
                 JournalEntry currentEntry = null;
 
                 while ((line = reader.ReadLine()) != null)
+
                 {
-                    if (string.IsNullOrWhiteSpace(line))
+                    if (!string.IsNullOrWhiteSpace(line))
                     {
-                        if (currentEntry != null)
-                            if (!_entries.Any(entry => entry._question == currentEntry._question))
+                        string question = line;
+                        string answer = reader.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(answer))
                         {
-                            _entries.Add(currentEntry);
-                            currentEntry = null;
-                        }
-                    }
-                    else
-                    {
-                        if (currentEntry == null)
-                        {
-                            currentEntry = new JournalEntry(DateTime.Now, line, "");
+                            _entries.Add(new JournalEntry(DateTime.Now, question, answer));
                         }
                     }
                 }
@@ -114,7 +109,7 @@ class Journal
         {
             Console.WriteLine("An error occurred while performing the operation.");
         }
-}
+    }
 
     public void DeleteJournalEntry()
     {
