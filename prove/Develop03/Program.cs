@@ -12,7 +12,7 @@ class Program
 
         // Create and add multiple scriptures to the list
         program.AddScripture("John", 3, 16, 16, "For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life.");
-        program.AddScripture("Genesis", 1, 1, 2, "In the beginning, God created the heavens and the earth.");
+        program.AddScripture("Genesis", 1, 1, 2, "In the beginning, God created the heavens and the earth. And the earth was without form, and void; and darkness was upon the face of the deep. And the spirit of God moved upon the face of the waters. And God said, let there be light: and there was light.");
 
         // Loop through the scriptures
         foreach (var scripture in program.scriptures)
@@ -22,7 +22,7 @@ class Program
                 Console.Clear();
                 scripture.Display();
 
-                Console.WriteLine("Press Enter to hide more words, type 'REVEAL' to reveal a word, or type 'QUIT' to exit.");
+                Console.WriteLine("Press Enter to hide more words, type 'REVEAL' to reveal a word, or type 'QUIT' to exit the program.");
                 string userInput = Console.ReadLine();
 
                 if (userInput.ToLower() == "quit")
@@ -40,13 +40,6 @@ class Program
             }
             Console.Clear();
         }
-    }
-
-    static void ClearConsole()
-    {
-        Console.SetCursorPosition(0, 0);
-        Console.Write(new string(' ', Console.WindowWidth * Console.WindowHeight));
-        Console.SetCursorPosition(0, 0);
     }
 
     public void AddScripture(string book, int chapter, int firstVerse, int secondVerse, string text)
