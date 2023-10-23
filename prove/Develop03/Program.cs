@@ -16,7 +16,7 @@ class Program
         // Loop through the scriptures
         foreach (var scripture in program.scriptures)
         {
-            while (!scripture.AllWordsHidden)
+            while (!scripture.finish)
             {
                 Console.Clear();
                 scripture.Display();
