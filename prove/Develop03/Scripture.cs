@@ -6,6 +6,7 @@ class Scripture
     private Reference reference;
     private List<Word> words;
     private int hiddenWordCount = 0;
+    public bool finish { get; private set; }
 
     public bool AllWordsHidden => hiddenWordCount == words.Count;
 
@@ -13,6 +14,7 @@ class Scripture
     {
         this.reference = reference;
         this.words = text.Split(' ').Select(word => new Word(word)).ToList();
+        this.finish = false;
     }
 
     public void Display()
@@ -34,6 +36,12 @@ class Scripture
 
     public void HideWords(int count)
     {
+        if(AllWordsHidden)
+        {
+            finish = true;
+            return;
+        }
+
         Random random = new Random();
         // Select random words to hide that are not already hidden
         List<Word> wordsToHide = words.Where(word => !word.IsHidden).OrderBy(_ => random.Next()).Take(count).ToList();
